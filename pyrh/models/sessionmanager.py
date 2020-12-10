@@ -518,9 +518,6 @@ class SessionManagerSchema(BaseSchema):
 
     __model__ = SessionManager
 
-    # Call untyped "Email" in typed context
-    username = fields.Email()  # type: ignore
-    password = fields.Str()
     challenge_type = fields.Str(validate=CHALLENGE_TYPE_VAL)
     oauth = fields.Nested(OAuthSchema)
     expires_at = fields.AwareDateTime()
@@ -541,7 +538,7 @@ class SessionManagerSchema(BaseSchema):
         """
         oauth = data.pop("oauth", None)
         expires_at = data.pop("expires_at", None)
-        session_manager = self.__model__(**data)
+        session_manager = self.__model__(username='username', password='password', **data)
 
         if oauth is not None and oauth.is_valid:
             session_manager.oauth = oauth
