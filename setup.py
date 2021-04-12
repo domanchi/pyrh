@@ -7,7 +7,7 @@ setup(
     packages=find_packages(exclude=(['test*', 'tmp*'])),
     version='2.0',
     license='MIT',
-    instalL_requires=[
+    install_requires=[
         'marshmallow',
         'python-dateutil',
         'pytz',
